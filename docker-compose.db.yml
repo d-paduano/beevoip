@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  nextjs_db:
+    image: mysql:8.0
+    command: --explicit_defaults_for_timestamp --sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./mysql-dump:/docker-entrypoint-initdb.d
+      - ./my_custom.cnf:/etc/mysql/conf.d/my_custom.cnf
+    environment:
+      - TZ=Europe/Rome
+      - MYSQL_ROOT_PASSWORD=Uhn5z2a3UEdh
+      - MYSQL_PASSWORD=GtyhYs3447Ex
+      - MYSQL_DATABASE=next
+      - MYSQL_USER=next
